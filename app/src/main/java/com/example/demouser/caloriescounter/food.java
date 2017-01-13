@@ -4,7 +4,7 @@ package com.example.demouser.caloriescounter;
  * Created by demouser on 1/13/17.
  */
 
-public class food {
+public class Food {
 
     String name;
     int calories;
@@ -12,11 +12,11 @@ public class food {
     boolean vegan;
     boolean halal;
 
-    public food(){
+    public Food(){
         this.name = null;
     }
 
-    public food(String name, int calories, boolean containsNuts, boolean vegan, boolean halal){
+    public Food(String name, int calories, boolean containsNuts, boolean vegan, boolean halal){
         this.name = name;
         this.calories = calories;
         this.containsNuts = containsNuts;
