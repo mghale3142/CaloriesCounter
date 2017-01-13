@@ -4,7 +4,7 @@ package com.example.demouser.caloriescounter;
  * Created by demouser on 1/13/17.
  */
 
-public class Food {
+public class Food implements Comparable {
 
     String name;
     int calories;
@@ -64,4 +64,19 @@ public class Food {
         this.halal = halal;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Food) {
+            if (this.calories < ((Food) o).calories) {
+                return -1;
+            }
+            if (this.calories == ((Food) o).calories) {
+                return 0;
+            }
+            if (this.calories > ((Food) o).calories) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 }
