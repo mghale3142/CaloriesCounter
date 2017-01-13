@@ -64,9 +64,6 @@ public class Food implements Comparable {
         this.halal = halal;
     }
 
-<<<<<<< HEAD
-}
-=======
     @Override
     public int compareTo(Object o) {
         if(o instanceof Food) {
@@ -83,4 +80,4 @@ public class Food implements Comparable {
         return 0;
     }
 }
->>>>>>> origin/master
+
