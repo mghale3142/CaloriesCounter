@@ -11,6 +11,7 @@ public class Food implements Comparable {
     boolean containsNuts;
     boolean vegan;
     boolean halal;
+    boolean none;
 
     public Food(){
         this.name = null;
@@ -62,6 +63,14 @@ public class Food implements Comparable {
 
     public void setHalal(boolean halal) {
         this.halal = halal;
+    }
+
+    public boolean isNone() {
+        return none;
+    }
+
+    public void setNone(boolean none) {
+        this.none = true;
     }
 
     @Override

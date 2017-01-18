@@ -15,7 +15,8 @@ public class CaloriesCounter {
     private HashMap<String, Set<Food>> mainCourse = new HashMap<>();
     private HashMap<String, Set<Food>> desserts = new HashMap<>();
 
-    boolean userVegan, userHalal, userNutFree, userNone;
+    private String[] foodOptions = {"noNuts", "vegan", "halal", "none"};
+    private boolean[] optionsChosen = {false, false, false, false};
 
     public CaloriesCounter() {
         initMenu();
@@ -56,6 +57,15 @@ public class CaloriesCounter {
                 }
                 appetizer.get("halal").add(f);
             }
+
+            // all food should go to none because they can eat everything
+            //if(f.isNone()){
+            //if (f.isNone()) {
+                if (!appetizer.containsKey("none")) {
+                    appetizer.put("none", new HashSet<Food>());
+                }
+                appetizer.get("none").add(f);
+            //}
         }
 
         // main course
@@ -87,6 +97,13 @@ public class CaloriesCounter {
                 }
                 mainCourse.get("halal").add(f);
             }
+
+            // all food should go to none because they can eat everything
+            //if(f.isNone()){
+                if (!mainCourse.containsKey("none")) {
+                    mainCourse.put("none", new HashSet<Food>());
+                }
+                mainCourse.get("none").add(f);
         }
 
         // desserts
@@ -118,14 +135,46 @@ public class CaloriesCounter {
                 }
                 desserts.get("halal").add(f);
             }
+
+            // all food should go to none because they can eat everything
+            //if(f.isNone()){
+                if (!desserts.containsKey("none")) {
+                    desserts.put("none", new HashSet<Food>());
+                }
+                desserts.get("none").add(f);
+            //}
         }
+    }
+
+    /**
+     * no restrictions
+     * @param userNone
+     */
+    public void setUserNone(boolean userNone) {
+        // this basically means that the user can eat halal food, glutten free, nut free and other foods
+        for (int i =0; i < optionsChosen.length; i++ ) {
+            //set all to true
+            optionsChosen[i] = true;
+        }
+    }
+
+    public void setUserNutFree(boolean userNutFree) {
+        // nutfree is 0th
+        optionsChosen[0] = true;
+    }
+
+    public void setUserHalal(boolean userHalal) {
+        optionsChosen[2] = true;
+    }
+
+    public void setUserVegan(boolean userVegan) {
+        optionsChosen[1] = true;
     }
 
     public ArrayList<Food> getEdibleAppetizers() {
         ArrayList<Food> result = new ArrayList<Food>();
-        /*
-         * @TODO
-         */
+        Set<Food> finalResult = null;
+
         return result;
     }
 
