@@ -3,6 +3,7 @@ package com.example.demouser.caloriescounter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,9 +12,9 @@ import java.util.Set;
 
 public class CaloriesCounter {
 
-    private HashMap<String, Set<Food>> appetizer = new HashMap<>();
-    private HashMap<String, Set<Food>> mainCourse = new HashMap<>();
-    private HashMap<String, Set<Food>> desserts = new HashMap<>();
+    private HashMap<String, ArrayList<Food>> appetizer = new HashMap<>();
+    private HashMap<String, ArrayList<Food>> mainCourse = new HashMap<>();
+    private HashMap<String, ArrayList<Food>> desserts = new HashMap<>();
 
     private String[] foodOptions = {"noNuts", "vegan", "halal", "none"};
     private boolean[] optionsChosen = {false, false, false, false};
@@ -39,21 +40,21 @@ public class CaloriesCounter {
         for(Food f : appetizerList){
             if(!f.containsNuts){
                 if (!appetizer.containsKey("noNuts")) {
-                    appetizer.put("noNuts", new HashSet<Food>());
+                    appetizer.put("noNuts", new ArrayList<Food>());
                 }
                 appetizer.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!appetizer.containsKey("vegan")) {
-                    appetizer.put("vegan", new HashSet<Food>());
+                    appetizer.put("vegan", new ArrayList<Food>());
                 }
                 appetizer.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!appetizer.containsKey("halal")) {
-                    appetizer.put("halal", new HashSet<Food>());
+                    appetizer.put("halal", new ArrayList<Food>());
                 }
                 appetizer.get("halal").add(f);
             }
@@ -62,7 +63,7 @@ public class CaloriesCounter {
             //if(f.isNone()){
             //if (f.isNone()) {
                 if (!appetizer.containsKey("none")) {
-                    appetizer.put("none", new HashSet<Food>());
+                    appetizer.put("none", new ArrayList<Food>());
                 }
                 appetizer.get("none").add(f);
             //}
@@ -79,21 +80,21 @@ public class CaloriesCounter {
         for(Food f : mainList){
             if(!f.containsNuts){
                 if (!mainCourse.containsKey("noNuts")) {
-                    mainCourse.put("noNuts", new HashSet<Food>());
+                    mainCourse.put("noNuts", new ArrayList<Food>());
                 }
                 mainCourse.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!mainCourse.containsKey("vegan")) {
-                    mainCourse.put("vegan", new HashSet<Food>());
+                    mainCourse.put("vegan", new ArrayList<Food>());
                 }
                 mainCourse.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!mainCourse.containsKey("halal")) {
-                    mainCourse.put("halal", new HashSet<Food>());
+                    mainCourse.put("halal", new ArrayList<Food>());
                 }
                 mainCourse.get("halal").add(f);
             }
@@ -101,7 +102,7 @@ public class CaloriesCounter {
             // all food should go to none because they can eat everything
             //if(f.isNone()){
                 if (!mainCourse.containsKey("none")) {
-                    mainCourse.put("none", new HashSet<Food>());
+                    mainCourse.put("none", new ArrayList<Food>());
                 }
                 mainCourse.get("none").add(f);
         }
@@ -117,21 +118,21 @@ public class CaloriesCounter {
         for(Food f : dessertList){
             if(!f.containsNuts){
                 if (!desserts.containsKey("noNuts")) {
-                    desserts.put("noNuts", new HashSet<Food>());
+                    desserts.put("noNuts", new ArrayList<Food>());
                 }
                 desserts.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!desserts.containsKey("vegan")) {
-                    desserts.put("vegan", new HashSet<Food>());
+                    desserts.put("vegan", new ArrayList<Food>());
                 }
                 desserts.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!desserts.containsKey("halal")) {
-                    desserts.put("halal", new HashSet<Food>());
+                    desserts.put("halal", new ArrayList<Food>());
                 }
                 desserts.get("halal").add(f);
             }
@@ -139,7 +140,7 @@ public class CaloriesCounter {
             // all food should go to none because they can eat everything
             //if(f.isNone()){
                 if (!desserts.containsKey("none")) {
-                    desserts.put("none", new HashSet<Food>());
+                    desserts.put("none", new ArrayList<Food>());
                 }
                 desserts.get("none").add(f);
             //}
@@ -172,11 +173,102 @@ public class CaloriesCounter {
     }
 
     public ArrayList<Food> getEdibleAppetizers() {
-        ArrayList<Food> result = new ArrayList<Food>();
-        Set<Food> finalResult = null;
+        ArrayList<Food> finalResult = new ArrayList<Food>();
 
-        return result;
+        for(int i = 0 ; i < optionsChosen.length - 1; i++) {
+            //if none is true, we want union of all foods
+            if (optionsChosen[optionsChosen.length-1]) {
+                // if no restriction, union
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = appetizer.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.addAll(appetizer.get(foodOptions[i]));
+                    }
+                }
+            }
+            else {
+                //intersection
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = appetizer.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.retainAll(appetizer.get(foodOptions[i]));
+                    }
+                }
+            }
+        }
+        return finalResult;
     }
 
 
+    public ArrayList<Food> getEdibleMainCourse() {
+        ArrayList<Food> finalResult = new ArrayList<Food>();
+
+        for(int i = 0 ; i < optionsChosen.length - 1; i++) {
+            //if none is true, we want union of all foods
+            if (optionsChosen[optionsChosen.length-1]) {
+                // if no restriction, union
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = mainCourse.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.addAll(mainCourse.get(foodOptions[i]));
+                    }
+                }
+            }
+            else {
+                //intersection
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = mainCourse.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.retainAll(mainCourse.get(foodOptions[i]));
+                    }
+                }
+            }
+        }
+        return finalResult;
+    }
+
+    public ArrayList<Food> getEdibleDessert() {
+        ArrayList<Food> finalResult = new ArrayList<Food>();
+
+        for(int i = 0 ; i < optionsChosen.length - 1; i++) {
+            //if none is true, we want union of all foods
+            if (optionsChosen[optionsChosen.length-1]) {
+                // if no restriction, union
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = desserts.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.addAll(desserts.get(foodOptions[i]));
+                    }
+                }
+            }
+            else {
+                //intersection
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = desserts.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.retainAll(desserts.get(foodOptions[i]));
+                    }
+                }
+            }
+        }
+        return finalResult;
+    }
 }
