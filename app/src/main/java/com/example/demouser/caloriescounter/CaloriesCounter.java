@@ -2,6 +2,8 @@ package com.example.demouser.caloriescounter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by demouser on 1/13/17.
@@ -9,9 +11,11 @@ import java.util.HashMap;
 
 public class CaloriesCounter {
 
-    private HashMap<String, ArrayList<Food>> appetizer = new HashMap<>();
-    private HashMap<String, ArrayList<Food>> mainCourse = new HashMap<>();
-    private HashMap<String, ArrayList<Food>> desserts = new HashMap<>();
+    private HashMap<String, Set<Food>> appetizer = new HashMap<>();
+    private HashMap<String, Set<Food>> mainCourse = new HashMap<>();
+    private HashMap<String, Set<Food>> desserts = new HashMap<>();
+
+    boolean userVegan, userHalal, userNutFree, userNone;
 
     public CaloriesCounter() {
         initMenu();
@@ -34,21 +38,21 @@ public class CaloriesCounter {
         for(Food f : appetizerList){
             if(!f.containsNuts){
                 if (!appetizer.containsKey("noNuts")) {
-                    appetizer.put("noNuts", new ArrayList<Food>());
+                    appetizer.put("noNuts", new HashSet<Food>());
                 }
                 appetizer.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!appetizer.containsKey("vegan")) {
-                    appetizer.put("vegan", new ArrayList<Food>());
+                    appetizer.put("vegan", new HashSet<Food>());
                 }
                 appetizer.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!appetizer.containsKey("halal")) {
-                    appetizer.put("halal", new ArrayList<Food>());
+                    appetizer.put("halal", new HashSet<Food>());
                 }
                 appetizer.get("halal").add(f);
             }
@@ -65,21 +69,21 @@ public class CaloriesCounter {
         for(Food f : mainList){
             if(!f.containsNuts){
                 if (!mainCourse.containsKey("noNuts")) {
-                    mainCourse.put("noNuts", new ArrayList<Food>());
+                    mainCourse.put("noNuts", new HashSet<Food>());
                 }
                 mainCourse.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!mainCourse.containsKey("vegan")) {
-                    mainCourse.put("vegan", new ArrayList<Food>());
+                    mainCourse.put("vegan", new HashSet<Food>());
                 }
                 mainCourse.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!mainCourse.containsKey("halal")) {
-                    mainCourse.put("halal", new ArrayList<Food>());
+                    mainCourse.put("halal", new HashSet<Food>());
                 }
                 mainCourse.get("halal").add(f);
             }
@@ -96,25 +100,33 @@ public class CaloriesCounter {
         for(Food f : dessertList){
             if(!f.containsNuts){
                 if (!desserts.containsKey("noNuts")) {
-                    desserts.put("noNuts", new ArrayList<Food>());
+                    desserts.put("noNuts", new HashSet<Food>());
                 }
                 desserts.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!desserts.containsKey("vegan")) {
-                    desserts.put("vegan", new ArrayList<Food>());
+                    desserts.put("vegan", new HashSet<Food>());
                 }
                 desserts.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!desserts.containsKey("halal")) {
-                    desserts.put("halal", new ArrayList<Food>());
+                    desserts.put("halal", new HashSet<Food>());
                 }
                 desserts.get("halal").add(f);
             }
         }
+    }
+
+    public ArrayList<Food> getEdibleAppetizers() {
+        ArrayList<Food> result = new ArrayList<Food>();
+        /*
+         * @TODO
+         */
+        return result;
     }
 
 
