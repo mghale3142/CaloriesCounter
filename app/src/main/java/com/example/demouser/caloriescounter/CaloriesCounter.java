@@ -2,6 +2,8 @@ package com.example.demouser.caloriescounter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by demouser on 1/13/17.
@@ -9,9 +11,12 @@ import java.util.HashMap;
 
 public class CaloriesCounter {
 
-    private HashMap<String, ArrayList<Food>> appetizer = new HashMap<>();
-    private HashMap<String, ArrayList<Food>> mainCourse = new HashMap<>();
-    private HashMap<String, ArrayList<Food>> desserts = new HashMap<>();
+    private HashMap<String, Set<Food>> appetizer = new HashMap<>();
+    private HashMap<String, Set<Food>> mainCourse = new HashMap<>();
+    private HashMap<String, Set<Food>> desserts = new HashMap<>();
+
+    private String[] foodOptions = {"noNuts", "vegan", "halal", "none"};
+    private boolean[] optionsChosen = {false, false, false, false};
 
     public CaloriesCounter() {
         initMenu();
@@ -34,24 +39,33 @@ public class CaloriesCounter {
         for(Food f : appetizerList){
             if(!f.containsNuts){
                 if (!appetizer.containsKey("noNuts")) {
-                    appetizer.put("noNuts", new ArrayList<Food>());
+                    appetizer.put("noNuts", new HashSet<Food>());
                 }
                 appetizer.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!appetizer.containsKey("vegan")) {
-                    appetizer.put("vegan", new ArrayList<Food>());
+                    appetizer.put("vegan", new HashSet<Food>());
                 }
                 appetizer.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!appetizer.containsKey("halal")) {
-                    appetizer.put("halal", new ArrayList<Food>());
+                    appetizer.put("halal", new HashSet<Food>());
                 }
                 appetizer.get("halal").add(f);
             }
+
+            // all food should go to none because they can eat everything
+            //if(f.isNone()){
+            //if (f.isNone()) {
+                if (!appetizer.containsKey("none")) {
+                    appetizer.put("none", new HashSet<Food>());
+                }
+                appetizer.get("none").add(f);
+            //}
         }
 
         // main course
@@ -65,24 +79,31 @@ public class CaloriesCounter {
         for(Food f : mainList){
             if(!f.containsNuts){
                 if (!mainCourse.containsKey("noNuts")) {
-                    mainCourse.put("noNuts", new ArrayList<Food>());
+                    mainCourse.put("noNuts", new HashSet<Food>());
                 }
                 mainCourse.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!mainCourse.containsKey("vegan")) {
-                    mainCourse.put("vegan", new ArrayList<Food>());
+                    mainCourse.put("vegan", new HashSet<Food>());
                 }
                 mainCourse.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!mainCourse.containsKey("halal")) {
-                    mainCourse.put("halal", new ArrayList<Food>());
+                    mainCourse.put("halal", new HashSet<Food>());
                 }
                 mainCourse.get("halal").add(f);
             }
+
+            // all food should go to none because they can eat everything
+            //if(f.isNone()){
+                if (!mainCourse.containsKey("none")) {
+                    mainCourse.put("none", new HashSet<Food>());
+                }
+                mainCourse.get("none").add(f);
         }
 
         // desserts
@@ -96,25 +117,65 @@ public class CaloriesCounter {
         for(Food f : dessertList){
             if(!f.containsNuts){
                 if (!desserts.containsKey("noNuts")) {
-                    desserts.put("noNuts", new ArrayList<Food>());
+                    desserts.put("noNuts", new HashSet<Food>());
                 }
                 desserts.get("noNuts").add(f);
             }
 
             if(f.isVegan()){
                 if (!desserts.containsKey("vegan")) {
-                    desserts.put("vegan", new ArrayList<Food>());
+                    desserts.put("vegan", new HashSet<Food>());
                 }
                 desserts.get("vegan").add(f);
             }
 
             if(f.isHalal()){
                 if (!desserts.containsKey("halal")) {
-                    desserts.put("halal", new ArrayList<Food>());
+                    desserts.put("halal", new HashSet<Food>());
                 }
                 desserts.get("halal").add(f);
             }
+
+            // all food should go to none because they can eat everything
+            //if(f.isNone()){
+                if (!desserts.containsKey("none")) {
+                    desserts.put("none", new HashSet<Food>());
+                }
+                desserts.get("none").add(f);
+            //}
         }
+    }
+
+    /**
+     * no restrictions
+     * @param userNone
+     */
+    public void setUserNone(boolean userNone) {
+        // this basically means that the user can eat halal food, glutten free, nut free and other foods
+        for (int i =0; i < optionsChosen.length; i++ ) {
+            //set all to true
+            optionsChosen[i] = true;
+        }
+    }
+
+    public void setUserNutFree(boolean userNutFree) {
+        // nutfree is 0th
+        optionsChosen[0] = true;
+    }
+
+    public void setUserHalal(boolean userHalal) {
+        optionsChosen[2] = true;
+    }
+
+    public void setUserVegan(boolean userVegan) {
+        optionsChosen[1] = true;
+    }
+
+    public ArrayList<Food> getEdibleAppetizers() {
+        ArrayList<Food> result = new ArrayList<Food>();
+        Set<Food> finalResult = null;
+
+        return result;
     }
 
 
