@@ -21,17 +21,19 @@ public class Result extends AppCompatActivity {
         caloriesCounter = new CaloriesCounter();
 
         Intent intent = getIntent();
-        caloriesCounter.setUserNone(intent.getBooleanExtra(MainActivity.NO_RESTRICTIONS, false));
         caloriesCounter.setUserVegan(intent.getBooleanExtra(MainActivity.VEGAN, false));
         caloriesCounter.setUserNutFree(intent.getBooleanExtra(MainActivity.NUT_FREE, false));
         caloriesCounter.setUserHalal(intent.getBooleanExtra(MainActivity.HALAL, false));
+        //this has to be last because if the user selects none, we want all to be selected!!!
+        caloriesCounter.setUserNone(intent.getBooleanExtra(MainActivity.NO_RESTRICTIONS, false));
+
         //default is 1500
         int calories = intent.getIntExtra(MainActivity.CALORIES, 1500);
 
         int oneThird = calories/3;
         // get the edible appetizers, main course and dessert
         ArrayList<Menu> appetizers = getSubset(caloriesCounter.getEdibleAppetizers(), oneThird);
-        ArrayList<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), oneThird*2);
+        ArrayList<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (oneThird*2));
         ArrayList<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), oneThird);
 
 
@@ -105,9 +107,12 @@ public class Result extends AppCompatActivity {
          */
         Food temp = menu.remove(0);
 
-        ArrayList<Menu> withList = getSubset(menu, caloriesSum-temp.calories);
-        if (withList.isEmpty()) {
+        ArrayList<Menu> withList = getSubset(menu, (caloriesSum - temp.getCalories()));
+        if ( withList==null) {
             withList = new ArrayList<Menu>();
+
+        }
+        if (withList.isEmpty()) {
             withList.add(new Menu());
 
         }

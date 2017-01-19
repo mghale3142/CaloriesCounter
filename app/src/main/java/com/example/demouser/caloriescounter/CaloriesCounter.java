@@ -179,9 +179,10 @@ public class CaloriesCounter {
     }
 
     public ArrayList<Food> getEdibleAppetizers() {
-        ArrayList<Food> finalResult = new ArrayList<Food>();
+        ArrayList<Food> finalResult = null;
 
-        for(int i = 0 ; i < optionsChosen.length - 1; i++) {
+        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
+        for(int i = 0 ; i < includeNone; i++) {
             //if none is true, we want union of all foods
             if (optionsChosen[optionsChosen.length-1]) {
                 // if no restriction, union
@@ -213,9 +214,10 @@ public class CaloriesCounter {
 
 
     public ArrayList<Food> getEdibleMainCourse() {
-        ArrayList<Food> finalResult = new ArrayList<Food>();
+        ArrayList<Food> finalResult = null;
 
-        for(int i = 0 ; i < optionsChosen.length - 1; i++) {
+        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
+        for(int i = 0 ; i < includeNone; i++) {
             //if none is true, we want union of all foods
             if (optionsChosen[optionsChosen.length-1]) {
                 // if no restriction, union
@@ -246,9 +248,9 @@ public class CaloriesCounter {
     }
 
     public ArrayList<Food> getEdibleDessert() {
-        ArrayList<Food> finalResult = new ArrayList<Food>();
-
-        for(int i = 0 ; i < optionsChosen.length - 1; i++) {
+        ArrayList<Food> finalResult = null;
+        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
+        for(int i = 0 ; i < includeNone; i++) {
             //if none is true, we want union of all foods
             if (optionsChosen[optionsChosen.length-1]) {
                 // if no restriction, union
