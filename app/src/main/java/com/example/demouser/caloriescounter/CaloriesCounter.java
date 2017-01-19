@@ -162,19 +162,37 @@ public class CaloriesCounter {
 
     public void setUserNutFree(boolean userNutFree) {
         // nutfree is 0th
+        if (userNutFree) {
         optionsChosen[0] = true;
         optionsChosen[optionsChosen.length-1] = false;
+        }
+        else {
+            optionsChosen[0] = false;
+
+        }
+
     }
 
     public void setUserHalal(boolean userHalal) {
-        optionsChosen[2] = true;
-        optionsChosen[optionsChosen.length-1] = false;
+        if (userHalal) {
+            optionsChosen[2] = true;
+            optionsChosen[optionsChosen.length - 1] = false;
+        }
+        else {
+            optionsChosen[2] = true;
+
+        }
 
     }
 
     public void setUserVegan(boolean userVegan) {
-        optionsChosen[1] = true;
-        optionsChosen[optionsChosen.length-1] = false;
+        if(userVegan) {
+            optionsChosen[1] = true;
+            optionsChosen[optionsChosen.length - 1] = false;
+        }
+        else {
+            optionsChosen[1] = true;
+        }
 
     }
 
