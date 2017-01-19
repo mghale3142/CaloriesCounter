@@ -19,7 +19,7 @@ public class CaloriesCounter {
     private String[] foodOptions = {"noNuts", "vegan", "halal", "none"};
     private boolean[] optionsChosen = {false, false, false, false};
 
-    public CaloriesCounter(boolean a, boolean b, boolean c, boolean d) {
+    public CaloriesCounter() {
         initMenu();
     }
 

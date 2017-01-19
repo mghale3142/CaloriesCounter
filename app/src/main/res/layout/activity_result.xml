@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/desset_menu" />
+            android:id="@+id/dessert_menu" />
 
         <Button
             android:text="RESET"
