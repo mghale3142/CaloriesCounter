@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, Result.class);
 
 
-        noRestrictionButton = (RadioButton) findViewById(R.id.noRestrictionButton);
-        noRestrictionButton.setOnClickListener(new View.OnClickListener() {
+        ((RadioButton) findViewById(R.id.noRestrictionButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -35,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        VeganButton = (RadioButton) findViewById(R.id.veganButton);
-        VeganButton.setOnClickListener(new View.OnClickListener() {
+        ((RadioButton) findViewById(R.id.veganButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -44,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        HalalButton = (RadioButton) findViewById(R.id.halalButton);
-        HalalButton.setOnClickListener(new View.OnClickListener() {
+        ((RadioButton) findViewById(R.id.halalButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -60,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(NUT_FREE, true);
             }
         });
+
 
         ((Button)findViewById(R.id.submit)) .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,15 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        NutFreeButton = (RadioButton) findViewById(R.id.noNutButton);
-        NutFreeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        counter = new CaloriesCounter(isNoRestriction, isVegan, isHalal, isNutFree);
 
     }
 
