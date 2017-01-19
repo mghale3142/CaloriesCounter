@@ -35,11 +35,11 @@ public class Result extends AppCompatActivity {
         //default is 1500
         int calories = intent.getIntExtra(MainActivity.CALORIES, 1500);
 
-        int oneThird = calories/3;
+        int ratio = calories/4;
         // get the edible appetizers, main course and dessert
-        HashSet<Menu> appetizers = getSubset(caloriesCounter.getEdibleAppetizers(), oneThird);
-        HashSet<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (oneThird*2));
-        HashSet<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), oneThird);
+        HashSet<Menu> appetizers = getSubset(caloriesCounter.getEdibleAppetizers(), ratio);
+        HashSet<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (ratio*2));
+        HashSet<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), ratio);
 
 
         StringBuilder sbAppetizer = new StringBuilder();

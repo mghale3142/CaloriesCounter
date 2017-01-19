@@ -73,16 +73,24 @@ public class MainActivity extends AppCompatActivity {
 
                 // see if the value in the calories text is within range
                 // if calories within "healthy range", do calculation
-                if (calories >= 1000 && calories <= 2100 && checked) {
+                if (calories >= 500 && calories <= 2100 && checked) {
                     intent.putExtra(CALORIES, calories);
                     startActivity(intent);
-                    //after this, we want to be done
-                    finish();
-                    return;
+                    // it only comes back if the user hit reset. reset everything
+                    ((CheckBox) findViewById(R.id.noRestrictionButton)).setChecked(false);
+
+                    ((CheckBox) findViewById(R.id.veganButton)).setChecked(false);
+
+                    ((CheckBox) findViewById(R.id.halalButton)).setChecked(false);
+
+                    ((CheckBox) findViewById(R.id.noNutButton)).setChecked(false);
+                    ((EditText)findViewById(R.id.CaloriesLimitText)).setText("");
+
                 } else{
                     Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 }

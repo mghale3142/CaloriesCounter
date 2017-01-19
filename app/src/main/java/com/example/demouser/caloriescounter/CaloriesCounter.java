@@ -162,41 +162,50 @@ public class CaloriesCounter {
 
     public void setUserNutFree(boolean userNutFree) {
         // nutfree is 0th
+        if (userNutFree) {
         optionsChosen[0] = true;
         optionsChosen[optionsChosen.length-1] = false;
+        }
+        else {
+            optionsChosen[0] = false;
+
+        }
+
     }
 
     public void setUserHalal(boolean userHalal) {
-        optionsChosen[2] = true;
-        optionsChosen[optionsChosen.length-1] = false;
+        if (userHalal) {
+            optionsChosen[2] = true;
+            optionsChosen[optionsChosen.length - 1] = false;
+        }
+        else {
+            optionsChosen[2] = true;
+
+        }
 
     }
 
     public void setUserVegan(boolean userVegan) {
-        optionsChosen[1] = true;
-        optionsChosen[optionsChosen.length-1] = false;
+        if(userVegan) {
+            optionsChosen[1] = true;
+            optionsChosen[optionsChosen.length - 1] = false;
+        }
+        else {
+            optionsChosen[1] = true;
+        }
 
     }
 
     public HashSet<Food> getEdibleAppetizers() {
+
+        // IF NONE, RETURN THE NONE, ELSE, DO INTERSECTION OF FOODS
+        if (optionsChosen[optionsChosen.length-1]) {
+            return appetizer.get(foodOptions[optionsChosen.length-1]);
+        }
         HashSet<Food> finalResult = null;
 
-        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
-        for(int i = 0 ; i < includeNone; i++) {
-            //if none is true, we want union of all foods
-            if (optionsChosen[optionsChosen.length-1]) {
-                // if no restriction, union
-                if (optionsChosen[i]) {
-                    if (finalResult == null) {
-                        finalResult = appetizer.get(foodOptions[i]);
-                    }
-                    else {
-                        //find intersection
-                        finalResult.addAll(appetizer.get(foodOptions[i]));
-                    }
-                }
-            }
-            else {
+        for(int i = 0 ; i < optionsChosen.length-1; i++) {
+
                 //intersection
                 if (optionsChosen[i]) {
                     if (finalResult == null) {
@@ -207,31 +216,19 @@ public class CaloriesCounter {
                         finalResult.retainAll(appetizer.get(foodOptions[i]));
                     }
                 }
-            }
         }
         return finalResult;
     }
 
 
     public HashSet<Food> getEdibleMainCourse() {
+        if(optionsChosen[optionsChosen.length-1]) {
+            return mainCourse.get(foodOptions[optionsChosen.length-1]);
+        }
         HashSet<Food> finalResult = null;
 
-        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
-        for(int i = 0 ; i < includeNone; i++) {
-            //if none is true, we want union of all foods
-            if (optionsChosen[optionsChosen.length-1]) {
-                // if no restriction, union
-                if (optionsChosen[i]) {
-                    if (finalResult == null) {
-                        finalResult = mainCourse.get(foodOptions[i]);
-                    }
-                    else {
-                        //find intersection
-                        finalResult.addAll(mainCourse.get(foodOptions[i]));
-                    }
-                }
-            }
-            else {
+        for(int i = 0 ; i < optionsChosen.length-1; i++) {
+
                 //intersection
                 if (optionsChosen[i]) {
                     if (finalResult == null) {
@@ -242,29 +239,18 @@ public class CaloriesCounter {
                         finalResult.retainAll(mainCourse.get(foodOptions[i]));
                     }
                 }
-            }
+
         }
         return finalResult;
     }
 
     public HashSet<Food> getEdibleDessert() {
+        if(optionsChosen[optionsChosen.length-1]) {
+            return desserts.get(foodOptions[optionsChosen.length-1]);
+        }
         HashSet<Food> finalResult = null;
-        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
-        for(int i = 0 ; i < includeNone; i++) {
-            //if none is true, we want union of all foods
-            if (optionsChosen[optionsChosen.length-1]) {
-                // if no restriction, union
-                if (optionsChosen[i]) {
-                    if (finalResult == null) {
-                        finalResult = desserts.get(foodOptions[i]);
-                    }
-                    else {
-                        //find intersection
-                        finalResult.addAll(desserts.get(foodOptions[i]));
-                    }
-                }
-            }
-            else {
+        for(int i = 0 ; i < optionsChosen.length-1; i++) {
+
                 //intersection
                 if (optionsChosen[i]) {
                     if (finalResult == null) {
@@ -275,7 +261,7 @@ public class CaloriesCounter {
                         finalResult.retainAll(desserts.get(foodOptions[i]));
                     }
                 }
-            }
+
         }
         return finalResult;
     }
