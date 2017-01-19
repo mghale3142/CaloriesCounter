@@ -203,27 +203,6 @@ public class CaloriesCounter {
         HashSet<Food> finalResult = null;
 
         for(int i = 0 ; i < optionsChosen.length-1; i++) {
-
-<<<<<<< Updated upstream
-=======
-        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
-
-        for(int i = 0 ; i < includeNone; i++) {
-            //if none is true, we want union of all foods
-            if (optionsChosen[optionsChosen.length-1]) {
-                // if no restriction, union
-                if (optionsChosen[i]) {
-                    if (finalResult == null) {
-                        finalResult = appetizer.get(foodOptions[i]);
-                    }
-                    else {
-                        //find intersection
-                        finalResult.addAll(appetizer.get(foodOptions[i]));
-                    }
-                }
-            }
-            else {
->>>>>>> Stashed changes
                 //intersection
                 if (optionsChosen[i]) {
                     if (finalResult == null) {
