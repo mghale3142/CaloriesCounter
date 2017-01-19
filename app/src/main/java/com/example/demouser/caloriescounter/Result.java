@@ -161,7 +161,7 @@ public class Result extends AppCompatActivity {
         }
     }
 
-    void add(KnapsackProbSolver.Menu another) {
+    void add(Menu another) {
         menu.addAll(another.menu);
         calories+=another.getCalories();
     }
