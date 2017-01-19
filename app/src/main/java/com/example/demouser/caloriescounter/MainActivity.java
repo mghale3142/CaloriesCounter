@@ -5,29 +5,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean checked = false;
     public static String NO_RESTRICTIONS="package com.example.demouser.caloriescounter.NO_RESTRICTIONS";
     public static String NUT_FREE="package com.example.demouser.caloriescounter.NUT_FREE";
     public static String VEGAN="package com.example.demouser.caloriescounter.VEGAN";
     public static String HALAL="package com.example.demouser.caloriescounter.HALAL";
     public static String CALORIES="package com.example.demouser.caloriescounter.CALORIES";
 
+    private boolean checked = false;
 
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         intent = new Intent(this, Result.class);
 
 
-        ((RadioButton) findViewById(R.id.noRestrictionButton)).setOnClickListener(new View.OnClickListener() {
+        ((CheckBox) findViewById(R.id.noRestrictionButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ((RadioButton) findViewById(R.id.veganButton)).setOnClickListener(new View.OnClickListener() {
+        ((CheckBox) findViewById(R.id.veganButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ((RadioButton) findViewById(R.id.halalButton)).setOnClickListener(new View.OnClickListener() {
+        ((CheckBox) findViewById(R.id.halalButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -51,14 +54,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.noNutButton).setOnClickListener(new View.OnClickListener() {
+        ((CheckBox) findViewById(R.id.noNutButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
                 intent.putExtra(NUT_FREE, true);
             }
         });
-
 
         ((Button)findViewById(R.id.submit)) .setOnClickListener(new View.OnClickListener() {
             @Override

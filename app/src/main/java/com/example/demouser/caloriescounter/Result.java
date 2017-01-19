@@ -23,12 +23,11 @@ public class Result extends AppCompatActivity {
         caloriesCounter.setUserNutFree(intent.getBooleanExtra(MainActivity.NUT_FREE, false));
         caloriesCounter.setUserHalal(intent.getBooleanExtra(MainActivity.HALAL, false));
         int calories = intent.getIntExtra(MainActivity.CALORIES, 1500);
+
         // get the edible appetizers, main course and dessert
         ArrayList<Food> appetizers = caloriesCounter.getEdibleAppetizers();
         ArrayList<Food> mainCourse = caloriesCounter.getEdibleMainCourse();
         ArrayList<Food> dessert = caloriesCounter.getEdibleDessert();
-
-
 
     }
 
