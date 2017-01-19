@@ -203,9 +203,6 @@ public class CaloriesCounter {
         HashSet<Food> finalResult = null;
 
         for(int i = 0 ; i < optionsChosen.length-1; i++) {
-
-
-
                 //intersection
                 if (optionsChosen[i]) {
                     if (finalResult == null) {

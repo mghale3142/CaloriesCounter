@@ -17,6 +17,7 @@ import java.util.List;
 public class Result extends AppCompatActivity {
 
     private CaloriesCounter caloriesCounter;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
