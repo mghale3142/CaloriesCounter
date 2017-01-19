@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -54,25 +55,32 @@ public class MainActivity extends AppCompatActivity {
                     checked = true;
                 }
 
+                // check if user selected at least one dietary restrictions
+                if(!checked){
+                    Toast.makeText(MainActivity.this, "Please select a dietary restriction.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int calories;
+                String UserCaloriesEntry = ((EditText)findViewById(R.id.CaloriesLimitText)).getText().toString();
+                // check user actually entered a value
+                if (UserCaloriesEntry.matches("")) {
+                    Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else{
+                    calories = Integer.parseInt(UserCaloriesEntry);
+                }
 
                 // see if the value in the calories text is within range
-                int calories = Integer.parseInt(((TextView)findViewById(R.id.CaloriesLimitText)).getText().toString());
-
-                // if calories within "healthy range", do this, else, give a warning
+                // if calories within "healthy range", do calculation
                 if (calories >= 1000 && calories <= 2100 && checked) {
                     intent.putExtra(CALORIES, calories);
                     startActivity(intent);
                     //after this, we want to be done
                     finish();
                     return;
-                }
-                else {
-                    // if no dietary restriction selected
-                    if(!checked){
-                        Toast.makeText(MainActivity.this, "Please select a dietary restriction.", Toast.LENGTH_SHORT).show();
-                    } else { // else calories limit is out of range
-                        Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
-                    }
+                } else{
+                    Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
