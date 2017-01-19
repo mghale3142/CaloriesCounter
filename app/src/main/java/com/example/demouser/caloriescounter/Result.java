@@ -1,18 +1,23 @@
 package com.example.demouser.caloriescounter;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Result extends AppCompatActivity {
 
     private CaloriesCounter caloriesCounter;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +37,20 @@ public class Result extends AppCompatActivity {
 
         int oneThird = calories/3;
         // get the edible appetizers, main course and dessert
-        ArrayList<Menu> appetizers = getSubset(caloriesCounter.getEdibleAppetizers(), oneThird);
-        ArrayList<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (oneThird*2));
-        ArrayList<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), oneThird);
+        HashSet<Menu> appetizers = getSubset(caloriesCounter.getEdibleAppetizers(), oneThird);
+        HashSet<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (oneThird*2));
+        HashSet<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), oneThird);
 
 
         StringBuilder sbAppetizer = new StringBuilder();
 
         //now put them in the text box
         for(Menu menu : appetizers) {
+            sbAppetizer.append("<div>");
             sbAppetizer.append(menu.toString());
-            sbAppetizer.append("/n");
+            sbAppetizer.append("</div>");
         }
-        ((TextView) findViewById(R.id.appetizer_menu)).setText(sbAppetizer.toString());
+        ((TextView) findViewById(R.id.appetizer_menu)).setText(Html.fromHtml(sbAppetizer.toString(), Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV));
 
 
         StringBuilder sbMain = new StringBuilder();
@@ -53,7 +59,7 @@ public class Result extends AppCompatActivity {
         //now put them in the text box
         for(Menu menu : mainCourse) {
             sbMain.append(menu.toString());
-            sbMain.append("/n");
+            sbMain.append("\n");
         }
         ((TextView) findViewById(R.id.main_menu)).setText(sbMain.toString());
 
@@ -63,7 +69,7 @@ public class Result extends AppCompatActivity {
         //now put them in the text box
         for(Menu menu : dessert) {
             sbMain.append(menu.toString());
-            sbMain.append("/n");
+            sbMain.append("\n");
         }
         ((TextView) findViewById(R.id.dessert_menu)).setText(sbMain.toString());
 
@@ -78,7 +84,7 @@ public class Result extends AppCompatActivity {
     }
 
 
-    public ArrayList<Menu> getSubset(ArrayList<Food> menu, int caloriesSum){
+    public HashSet<Menu> getSubset(HashSet<Food> menu, int caloriesSum){
         //base case
         if (caloriesSum < 0 || menu==null) {
             return null;
@@ -86,12 +92,13 @@ public class Result extends AppCompatActivity {
         //if it is the last thing on menu, return it
         if (menu.size()==1 ) {
             // lm = list of menu
-            ArrayList<Menu> lm = new ArrayList<Menu>();
-            if (menu.get(0).calories < caloriesSum) {
+            HashSet<Menu> lm = new HashSet<Menu>();
+            Food tempFood = menu.iterator().next();
+            if (tempFood.calories < caloriesSum) {
 
-                Menu temp =  new Menu();
-                temp.add(menu.get(0));
-                lm.add(temp);
+                Menu tempMenu =  new Menu();
+                tempMenu.add(tempFood);
+                lm.add(tempMenu);
             }
             return lm;
         }
@@ -105,11 +112,12 @@ public class Result extends AppCompatActivity {
          * with case
          * reduce the calories sum
          */
-        Food temp = menu.remove(0);
-
-        ArrayList<Menu> withList = getSubset(menu, (caloriesSum - temp.getCalories()));
+        Food temp = menu.iterator().next();
+        // remove it
+        menu.remove(temp);
+        HashSet<Menu> withList = getSubset(menu, (caloriesSum - temp.getCalories()));
         if ( withList==null) {
-            withList = new ArrayList<Menu>();
+            withList = new HashSet<Menu>();
 
         }
         if (withList.isEmpty()) {
@@ -124,7 +132,7 @@ public class Result extends AppCompatActivity {
         /*
          * without case: cases that dosesn't include the temp
          */
-        ArrayList<Menu> withoutList = getSubset(menu, caloriesSum);
+        HashSet<Menu> withoutList = getSubset(menu, caloriesSum);
         if (withoutList!=null) {
 
             withList.addAll(withoutList);
@@ -138,7 +146,7 @@ public class Result extends AppCompatActivity {
 
 
  class Menu{
-    ArrayList<Food> menu = new ArrayList<Food>();
+    HashSet<Food> menu = new HashSet<Food>();
 
     int calories =0;
 
@@ -147,8 +155,10 @@ public class Result extends AppCompatActivity {
     }
 
     void add(Food food) {
-        menu.add(food);
-        calories+=food.calories;
+        if(!menu.contains(food)) {
+            menu.add(food);
+            calories += food.calories;
+        }
     }
 
     void add(KnapsackProbSolver.Menu another) {
@@ -165,7 +175,7 @@ public class Result extends AppCompatActivity {
         }
         if(sb.length() > 0) {
             //remove the last ,
-            sb.deleteCharAt(sb.length() - 1);
+            sb.replace(sb.lastIndexOf(","), sb.length(), ".");
         }
         return sb.toString();
     }
