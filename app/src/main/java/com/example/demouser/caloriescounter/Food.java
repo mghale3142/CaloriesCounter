@@ -26,6 +26,7 @@ public class Food implements Comparable {
     }
 
     public String getName() {
+        //always make the first character uppercase
         return name;
     }
 
