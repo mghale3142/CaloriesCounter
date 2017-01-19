@@ -23,6 +23,7 @@ public class CaloriesCounter {
         initMenu();
     }
 
+
     /**
      * Food(String name, int calories, boolean containsNuts, boolean vegan, boolean halal)
      */

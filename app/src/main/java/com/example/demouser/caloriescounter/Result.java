@@ -47,6 +47,7 @@ public class Result extends AppCompatActivity {
 
         StringBuilder sbMain = new StringBuilder();
 
+
         //now put them in the text box
         for(Menu menu : mainCourse) {
             sbMain.append(menu.toString());

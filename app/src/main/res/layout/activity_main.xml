@@ -28,50 +28,36 @@
         android:text="Select your dietary restrictions: "
         android:textSize="20sp" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:id="@+id/options_group">
-
-
-        <RadioButton
+        <CheckBox
             android:id="@+id/noRestrictionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:onClick="radioButtonClicked"
             android:text="No Restriction" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/veganButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="radioButtonClicked"
             android:text="Vegan Option" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/halalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="radioButtonClicked"
             android:text="Halal Option" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/noNutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:onClick="radioButtonClicked"
             android:text="Nuts Free Option" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="25dp" />
-    </RadioGroup>
 
 
     <LinearLayout
@@ -90,16 +76,16 @@
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Enter digit between 500-2000"
             android:ems="10"
-            android:id="@+id/CaloriesLimitText" />
+            android:id="@+id/CaloriesLimitText"
+            android:hint="Enter digit between 1000-2100" />
+
     </LinearLayout>
 
-    <TextView
-        android:text="TextView"
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/warningText" />
+        android:layout_height="25dp"
+        android:layout_weight="1" />
 
     <Button
         android:text="Pick my meal"
