@@ -17,11 +17,8 @@ import java.util.List;
 public class Result extends AppCompatActivity {
 
     private CaloriesCounter caloriesCounter;
-<<<<<<< Updated upstream
-    @RequiresApi(api = Build.VERSION_CODES.N)
-=======
 
->>>>>>> Stashed changes
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
