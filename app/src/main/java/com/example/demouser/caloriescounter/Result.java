@@ -67,7 +67,7 @@ public class Result extends AppCompatActivity {
             sbMain.append(menu.toString());
             sbMain.append("\n");
         }
-        ((TextView) findViewById(R.id.dessert_menu)).setText(sbMain.toString());
+        ((TextView) findViewById(R.id.dessert_menu)).setText(sbDessert.toString());
 
         ((Button) findViewById(R.id.reset_button)).setOnClickListener(new View.OnClickListener() {
             @Override
