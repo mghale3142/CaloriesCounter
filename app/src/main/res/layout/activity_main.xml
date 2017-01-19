@@ -94,10 +94,16 @@
             android:id="@+id/CaloriesLimitText" />
     </LinearLayout>
 
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/warningText" />
+
     <Button
         android:text="Pick my meal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button5" />
+        android:id="@+id/submit" />
 
 </LinearLayout>
