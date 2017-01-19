@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         intent = new Intent(this, Result.class);
 
-        findViewById(R.id.noRestrictionButton) .setOnClickListener(new View.OnClickListener() {
+
+        noRestrictionButton = (RadioButton) findViewById(R.id.noRestrictionButton);
+        noRestrictionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -33,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.veganButton) .setOnClickListener(new View.OnClickListener() {
+        VeganButton = (RadioButton) findViewById(R.id.veganButton);
+        VeganButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -41,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.halalButton) .setOnClickListener(new View.OnClickListener() {
+        HalalButton = (RadioButton) findViewById(R.id.halalButton);
+        HalalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checked=true;
@@ -73,9 +77,18 @@ public class MainActivity extends AppCompatActivity {
                 else {
 
                 }
-
             }
         });
+
+        NutFreeButton = (RadioButton) findViewById(R.id.noNutButton);
+        NutFreeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        counter = new CaloriesCounter(isNoRestriction, isVegan, isHalal, isNutFree);
+
     }
 
 
