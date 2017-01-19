@@ -17,7 +17,11 @@ import java.util.List;
 public class Result extends AppCompatActivity {
 
     private CaloriesCounter caloriesCounter;
+<<<<<<< Updated upstream
     @RequiresApi(api = Build.VERSION_CODES.N)
+=======
+
+>>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +45,7 @@ public class Result extends AppCompatActivity {
         HashSet<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (ratio*2));
         HashSet<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), ratio);
 
-
         StringBuilder sbAppetizer = new StringBuilder();
-
         //now put them in the text box
         for(Menu menu : appetizers) {
             sbAppetizer.append("<div>");
@@ -54,8 +56,6 @@ public class Result extends AppCompatActivity {
 
 
         StringBuilder sbMain = new StringBuilder();
-
-
         //now put them in the text box
         for(Menu menu : mainCourse) {
             sbMain.append(menu.toString());
@@ -65,7 +65,6 @@ public class Result extends AppCompatActivity {
 
 
         StringBuilder sbDessert = new StringBuilder();
-
         //now put them in the text box
         for(Menu menu : dessert) {
             sbMain.append(menu.toString());
@@ -73,11 +72,9 @@ public class Result extends AppCompatActivity {
         }
         ((TextView) findViewById(R.id.dessert_menu)).setText(sbMain.toString());
 
-
         ((Button) findViewById(R.id.reset_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
                 finish();
             }
         });
@@ -90,7 +87,7 @@ public class Result extends AppCompatActivity {
             return null;
         }
         //if it is the last thing on menu, return it
-        if (menu.size()==1 ) {
+        if (menu.size()==1) {
             // lm = list of menu
             HashSet<Menu> lm = new HashSet<Menu>();
             Food tempFood = menu.iterator().next();
@@ -143,7 +140,6 @@ public class Result extends AppCompatActivity {
 
 
 }
-
 
  class Menu{
     HashSet<Food> menu = new HashSet<Food>();
