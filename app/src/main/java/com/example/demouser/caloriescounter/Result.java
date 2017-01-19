@@ -34,13 +34,17 @@ public class Result extends AppCompatActivity {
         caloriesCounter.setUserNone(intent.getBooleanExtra(MainActivity.NO_RESTRICTIONS, false));
 
         //default is 1500
-        int calories = intent.getIntExtra(MainActivity.CALORIES, 1500);
+        int calories = intent.getIntExtra(MainActivity.CALORIES, 750);
 
         int ratio = calories/4;
         // get the edible appetizers, main course and dessert
         HashSet<Menu> appetizers = getSubset(caloriesCounter.getEdibleAppetizers(), ratio);
         HashSet<Menu> mainCourse = getSubset(caloriesCounter.getEdibleMainCourse(), (ratio*2));
-        HashSet<Menu> dessert = getSubset(caloriesCounter.getEdibleDessert(), ratio);
+        HashSet<Food> teDe = caloriesCounter.getEdibleDessert();
+        if(teDe==null) {
+            System.out.println("oppppppsssss");
+        }
+        HashSet<Menu> dessert = getSubset(teDe, ratio);
 
         StringBuilder sbAppetizer = new StringBuilder();
         //now put them in the text box
@@ -64,8 +68,9 @@ public class Result extends AppCompatActivity {
         StringBuilder sbDessert = new StringBuilder();
         //now put them in the text box
         for(Menu menu : dessert) {
-            sbMain.append(menu.toString());
-            sbMain.append("\n");
+            System.out.println("here");
+            sbDessert.append(menu.toString());
+            sbDessert.append("\n");
         }
         ((TextView) findViewById(R.id.dessert_menu)).setText(sbDessert.toString());
 
@@ -109,24 +114,29 @@ public class Result extends AppCompatActivity {
         Food temp = menu.iterator().next();
         // remove it
         menu.remove(temp);
-        HashSet<Menu> withList = getSubset(menu, (caloriesSum - temp.getCalories()));
-        if ( withList==null) {
-            withList = new HashSet<Menu>();
+        HashSet<Food> excluding = new HashSet<>(menu);
+        HashSet<Menu> withList = new HashSet<Menu>();
+        if(temp.getCalories() < caloriesSum) {
+            withList = getSubset(excluding, (caloriesSum - temp.getCalories()));
+            if ( withList==null) {
+                withList = new HashSet<Menu>();
 
-        }
-        if (withList.isEmpty()) {
-            withList.add(new Menu());
+            }
+            if (withList.isEmpty()) {
+                withList.add(new Menu());
 
-        }
-        for(Menu foodMenu : withList) {
-            // add temp to all of them
-            foodMenu.add(temp);
+            }
+            for(Menu foodMenu : withList) {
+                // add temp to all of them
+                foodMenu.add(temp);
+            }
+
         }
 
         /*
          * without case: cases that dosesn't include the temp
          */
-        HashSet<Menu> withoutList = getSubset(menu, caloriesSum);
+        HashSet<Menu> withoutList = getSubset(excluding, caloriesSum);
         if (withoutList!=null) {
 
             withList.addAll(withoutList);

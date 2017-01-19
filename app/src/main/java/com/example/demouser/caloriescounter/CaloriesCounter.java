@@ -152,9 +152,14 @@ public class CaloriesCounter {
      */
     public void setUserNone(boolean userNone) {
         // this basically means that the user can eat halal food, glutten free, nut free and other foods
-        for (int i =0; i < optionsChosen.length; i++ ) {
-            //set all to true
-            optionsChosen[i] = true;
+        if (userNone) {
+            for (int i = 0; i < optionsChosen.length; i++) {
+                //set all to true
+                optionsChosen[i] = true;
+            }
+        }
+        else {
+            optionsChosen[optionsChosen.length-1] = false;
         }
     }
 
@@ -177,7 +182,7 @@ public class CaloriesCounter {
             optionsChosen[optionsChosen.length - 1] = false;
         }
         else {
-            optionsChosen[2] = true;
+            optionsChosen[2] = false;
 
         }
 
@@ -189,7 +194,7 @@ public class CaloriesCounter {
             optionsChosen[optionsChosen.length - 1] = false;
         }
         else {
-            optionsChosen[1] = true;
+            optionsChosen[1] = false;
         }
 
     }
