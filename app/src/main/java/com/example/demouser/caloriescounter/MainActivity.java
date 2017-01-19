@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,46 +30,36 @@ public class MainActivity extends AppCompatActivity {
 
         intent = new Intent(this, Result.class);
 
-
-        ((CheckBox) findViewById(R.id.noRestrictionButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked=true;
-                intent.putExtra(NO_RESTRICTIONS, true);
-            }
-        });
-
-        ((CheckBox) findViewById(R.id.veganButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked=true;
-                intent.putExtra(VEGAN, true);
-            }
-        });
-
-        ((CheckBox) findViewById(R.id.halalButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked=true;
-                intent.putExtra(HALAL, true);
-            }
-        });
-
-        ((CheckBox) findViewById(R.id.noNutButton)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked=true;
-                intent.putExtra(NUT_FREE, true);
-            }
-        });
-
         ((Button)findViewById(R.id.submit)) .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // see if the value in the calories text is wihing range
+
+                if (((CheckBox) findViewById(R.id.noRestrictionButton)).isChecked()) {
+                    intent.putExtra(NO_RESTRICTIONS, true);
+                    checked = true;
+                }
+
+                if (((CheckBox) findViewById(R.id.veganButton)).isChecked()) {
+                    intent.putExtra(VEGAN, true);
+                    checked = true;
+                }
+
+                if (((CheckBox) findViewById(R.id.halalButton)).isChecked()) {
+                    intent.putExtra(HALAL, true);
+                    checked = true;
+                }
+
+                if (((CheckBox) findViewById(R.id.noNutButton)).isChecked()) {
+                    intent.putExtra(NUT_FREE, true);
+                    checked = true;
+                }
+
+
+                // see if the value in the calories text is within range
                 int calories = Integer.parseInt(((TextView)findViewById(R.id.CaloriesLimitText)).getText().toString());
+
                 // if calories within "healthy range", do this, else, give a warning
-                if (calories > 1000 && calories < 2100) {
+                if (calories >= 1000 && calories <= 2100 && checked) {
                     intent.putExtra(CALORIES, calories);
                     startActivity(intent);
                     //after this, we want to be done
@@ -76,20 +67,14 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 else {
-                    //
-                    ((TextView)findViewById(R.id.warningText)).setText("Please enter a value between 500 and 2100");
+                    // if no dietary restriction selected
+                    if(!checked){
+                        Toast.makeText(MainActivity.this, "Please select a dietary restriction.", Toast.LENGTH_SHORT).show();
+                    } else { // else calories limit is out of range
+                        Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
-
     }
-
-
-    public void showResult() {
-        // AFTER THE user submits the button, start a new intent, giving it
-        Intent intent = new Intent(this, Result.class);
-        // intent.putExtra(USER_SCORE, String.valueOf(playerTotal));// --> in player wins
-        startActivity(intent);
-    }
-
 }
