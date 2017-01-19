@@ -23,13 +23,11 @@ public class CaloriesCounter {
         initMenu();
     }
 
-
     /**
      * Food(String name, int calories, boolean containsNuts, boolean vegan, boolean halal)
      */
 
     private void initMenu(){
-
         // appetizer
         Food appe1 = new Food("Chicken salad", 50, true, false, true);
         Food appe2 = new Food("Shrimp salad", 52, true, false, true);
@@ -206,6 +204,26 @@ public class CaloriesCounter {
 
         for(int i = 0 ; i < optionsChosen.length-1; i++) {
 
+<<<<<<< Updated upstream
+=======
+        int includeNone =  (optionsChosen[optionsChosen.length-1])? optionsChosen.length : optionsChosen.length-1;
+
+        for(int i = 0 ; i < includeNone; i++) {
+            //if none is true, we want union of all foods
+            if (optionsChosen[optionsChosen.length-1]) {
+                // if no restriction, union
+                if (optionsChosen[i]) {
+                    if (finalResult == null) {
+                        finalResult = appetizer.get(foodOptions[i]);
+                    }
+                    else {
+                        //find intersection
+                        finalResult.addAll(appetizer.get(foodOptions[i]));
+                    }
+                }
+            }
+            else {
+>>>>>>> Stashed changes
                 //intersection
                 if (optionsChosen[i]) {
                     if (finalResult == null) {
@@ -265,5 +283,4 @@ public class CaloriesCounter {
         }
         return finalResult;
     }
-
 }
