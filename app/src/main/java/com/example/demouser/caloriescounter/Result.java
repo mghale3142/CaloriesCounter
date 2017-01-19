@@ -17,11 +17,7 @@ import java.util.List;
 public class Result extends AppCompatActivity {
 
     private CaloriesCounter caloriesCounter;
-<<<<<<< Updated upstream
     @RequiresApi(api = Build.VERSION_CODES.N)
-=======
-
->>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +66,7 @@ public class Result extends AppCompatActivity {
             sbMain.append(menu.toString());
             sbMain.append("\n");
         }
-        ((TextView) findViewById(R.id.dessert_menu)).setText(sbMain.toString());
+        ((TextView) findViewById(R.id.dessert_menu)).setText(sbDessert.toString());
 
         ((Button) findViewById(R.id.reset_button)).setOnClickListener(new View.OnClickListener() {
             @Override

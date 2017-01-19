@@ -19,20 +19,15 @@
         android:layout_alignParentEnd="false"
         android:fillViewport="true">
 
-<<<<<<< Updated upstream
-        <TextView
-            android:text="Appetizer"
-=======
         <LinearLayout
             android:orientation="vertical"
->>>>>>> Stashed changes
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
             <TextView
-                android:text="Appetizer Menu"
+                android:text="Appetizer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
