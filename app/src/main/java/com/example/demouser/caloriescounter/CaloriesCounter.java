@@ -162,14 +162,19 @@ public class CaloriesCounter {
     public void setUserNutFree(boolean userNutFree) {
         // nutfree is 0th
         optionsChosen[0] = true;
+        optionsChosen[optionsChosen.length-1] = false;
     }
 
     public void setUserHalal(boolean userHalal) {
         optionsChosen[2] = true;
+        optionsChosen[optionsChosen.length-1] = false;
+
     }
 
     public void setUserVegan(boolean userVegan) {
         optionsChosen[1] = true;
+        optionsChosen[optionsChosen.length-1] = false;
+
     }
 
     public ArrayList<Food> getEdibleAppetizers() {
@@ -271,4 +276,5 @@ public class CaloriesCounter {
         }
         return finalResult;
     }
+
 }
