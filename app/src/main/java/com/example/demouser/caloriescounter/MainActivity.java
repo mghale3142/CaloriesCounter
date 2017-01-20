@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 String UserCaloriesEntry = ((EditText)findViewById(R.id.CaloriesLimitText)).getText().toString();
                 // check user actually entered a value
                 if (UserCaloriesEntry.matches("")) {
-                    Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please enter a value between 250 and 1000.", Toast.LENGTH_SHORT).show();
                     return;
                 } else{
                     calories = Integer.parseInt(UserCaloriesEntry);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // see if the value in the calories text is within range
                 // if calories within "healthy range", do calculation
-                if (calories >= 500 && calories <= 2100 && checked) {
+                if (calories >= 250 && calories <= 1000 && checked) {
                     intent.putExtra(CALORIES, calories);
                     startActivity(intent);
                     // it only comes back if the user hit reset. reset everything
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     ((EditText)findViewById(R.id.CaloriesLimitText)).setText("");
 
                 } else{
-                    Toast.makeText(MainActivity.this, "Please enter a value between 500 and 2100.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please enter a value between 250 and 1000.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
