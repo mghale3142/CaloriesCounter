@@ -34,7 +34,12 @@ public class CaloriesCounter {
         Food appe3 = new Food("Vegetable salad", 35, false, true, true);
         Food appe4 = new Food("Mozzarella sticks", 65, false, false, true);
 
-        Food[] appetizerList = new Food[]{appe1, appe2, appe3, appe4};
+        Food appe5 = new Food("Edamame", 71, true, true, true);
+        Food appe6 = new Food("Barbeque Pork", 90, true, false, false);
+        Food appe7 = new Food("Hummus", 83, true, true, true);
+        Food appe8 = new Food("Vietnamese Spring Roll", 121, true, false, true);
+
+        Food[] appetizerList = new Food[]{appe1, appe2, appe3, appe4, appe5, appe6, appe7, appe8};
 
         for(Food f : appetizerList){
             if(!f.containsNuts){
@@ -74,7 +79,11 @@ public class CaloriesCounter {
         Food main3 = new Food("Vegan bean burrito", 350, true, true, true);
         Food main4 = new Food("Spicy pork bulgogi", 464, false, false, false);
 
-        Food[] mainList = new Food[]{main1, main2, main3, main4};
+        Food main5 = new Food("Taco", 226, true, false, true);
+        Food main6 = new Food("Quessadila", 528, true, false, true);
+        Food main7 = new Food("Shrimp fried rice", 321, true, false, true);
+        Food main8 = new Food("Vegetable stir fry", 200, true, true, true);
+        Food[] mainList = new Food[]{main1, main2, main3, main4, main5, main6, main7, main8};
 
         for(Food f : mainList){
             if(!f.containsNuts){
@@ -152,9 +161,14 @@ public class CaloriesCounter {
      */
     public void setUserNone(boolean userNone) {
         // this basically means that the user can eat halal food, glutten free, nut free and other foods
-        for (int i =0; i < optionsChosen.length; i++ ) {
-            //set all to true
-            optionsChosen[i] = true;
+        if (userNone) {
+            for (int i = 0; i < optionsChosen.length; i++) {
+                //set all to true
+                optionsChosen[i] = true;
+            }
+        }
+        else {
+            optionsChosen[optionsChosen.length-1] = false;
         }
     }
 
@@ -177,7 +191,7 @@ public class CaloriesCounter {
             optionsChosen[optionsChosen.length - 1] = false;
         }
         else {
-            optionsChosen[2] = true;
+            optionsChosen[2] = false;
 
         }
 
@@ -189,7 +203,7 @@ public class CaloriesCounter {
             optionsChosen[optionsChosen.length - 1] = false;
         }
         else {
-            optionsChosen[1] = true;
+            optionsChosen[1] = false;
         }
 
     }

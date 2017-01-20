@@ -82,7 +82,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/CaloriesLimitText"
-            android:hint="Enter digit between 1000-2100" />
+            android:hint="Enter digit between 1000-2100"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
 
