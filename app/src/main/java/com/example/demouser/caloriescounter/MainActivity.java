@@ -12,6 +12,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+
 public class MainActivity extends AppCompatActivity {
 
     public static String NO_RESTRICTIONS="package com.example.demouser.caloriescounter.NO_RESTRICTIONS";
@@ -22,11 +26,36 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checked = false;
 
+    // firebase
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private DatabaseReference mFirebaseDatabase;
+
+    private String mUserEmail;
+
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if(mFirebaseUser == null){
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
+            return;
+        }else {
+            mUserEmail = mFirebaseUser.getEmail();
+            mUserEmail = mUserEmail.substring(0, mUserEmail.indexOf('@'))
+                    .replace('.', '_')
+                    .replace('#', '_')
+                    .replace('$', '_')
+                    .replace('[', '_')
+                    .replace(']', '_');
+        }
+
         setContentView(R.layout.activity_main);
 
         intent = new Intent(this, Result.class);
